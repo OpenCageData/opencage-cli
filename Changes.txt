@@ -1,4 +1,4 @@
-v1.0.0 Sat May  2 2026
+v1.0.0 Mon Jun 08 2026
   Extracted from the `opencage` Python package; the CLI is now a standalone
   `opencage-cli` distribution that depends on `opencage>=3.3.1` from PyPI.
   No feature changes. Internal Python module renamed to `opencage_cli`.
