@@ -52,6 +52,9 @@ options:
   --verbose             Display debug information for each request
 ```
 
+Set `OPENCAGE_GEOCODING_API_KEY` to avoid passing your API key on the command
+line. A supplied `--api-key` takes precedence over the environment variable.
+
 <img src="batch-progress.gif"/>
 
 See [`examples/addresses.csv`](examples/addresses.csv) for sample input.
