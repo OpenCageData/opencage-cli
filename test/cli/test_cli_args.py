@@ -61,6 +61,31 @@ def test_invalid_api_key(capfd):
     )
 
 
+def test_api_key_from_environment(monkeypatch):
+    monkeypatch.setenv("OPENCAGE_GEOCODING_API_KEY", "oc_gc_12345678901234567890123456789012")
+
+    args = parse_args([
+        "forward",
+        "--input", "test/fixtures/input.txt",
+        "--output", "test/fixtures/output.csv"
+    ])
+
+    assert args.api_key == "oc_gc_12345678901234567890123456789012"
+
+
+def test_command_line_api_key_overrides_environment(monkeypatch):
+    monkeypatch.setenv("OPENCAGE_GEOCODING_API_KEY", "oc_gc_12345678901234567890123456789012")
+
+    args = parse_args([
+        "forward",
+        "--api-key", "12345678901234567890123456789012",
+        "--input", "test/fixtures/input.txt",
+        "--output", "test/fixtures/output.csv"
+    ])
+
+    assert args.api_key == "12345678901234567890123456789012"
+
+
 def test_existing_output_file(capfd):
     assert_parse_args_error(
         [

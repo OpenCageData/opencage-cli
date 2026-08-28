@@ -1,6 +1,7 @@
 import argparse
 import sys
 import io
+import os
 from pathlib import Path
 import re
 import csv
@@ -52,7 +53,12 @@ def parse_args(args):
         'reverse', help="Reverse geocode a file (input is coordinates, add full address)")
 
     for subparser in [subparser_forward, subparser_reverse]:
-        subparser.add_argument("--api-key", required=True, type=api_key_type, help="Your OpenCage API key")
+        subparser.add_argument(
+            "--api-key",
+            default=os.environ.get("OPENCAGE_GEOCODING_API_KEY"),
+            required="OPENCAGE_GEOCODING_API_KEY" not in os.environ,
+            type=api_key_type,
+            help="Your OpenCage API key (or OPENCAGE_GEOCODING_API_KEY environment variable)")
         subparser.add_argument(
             "--input",
             required=True,
